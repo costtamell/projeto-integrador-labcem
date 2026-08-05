@@ -1,24 +1,39 @@
 const express = require("express");
-
 const router = express.Router();
 
-router.get("/",(req,res)=>{
+const reservas = require("../data/reservas");
 
-res.json([
+const horarios = [
+    "07:15",
+    "08:05",
+    "08:55",
+    "10:00",
+    "10:50",
+    "11:35",
+    "13:15",
+    "14:05"
+];
 
-"07:15",
+router.get("/", (req, res) => {
 
-"08:05",
+    const { ambiente, data } = req.query;
 
-"08:55",
+    const lista = horarios.map(horario => {
 
-"10:00",
+        const ocupado = reservas.some(r =>
+            r.ambiente === ambiente &&
+            r.data === data &&
+            r.hora === horario
+        );
 
-"10:50",
+        return {
+            horario,
+            ocupado
+        };
 
-"11:35"
+    });
 
-]);
+    res.json(lista);
 
 });
 
