@@ -1,0 +1,274 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#d9f2df;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.container{
+
+    width:390px;
+    min-height:844px;
+
+    background:#d8f0dc;
+
+    display:flex;
+    flex-direction:column;
+
+}
+
+.topo{
+
+    background:#b8ddb7;
+
+    padding:20px;
+
+}
+
+.titulo{
+
+    text-align:center;
+
+    font-size:25px;
+
+    color:#3d3d3d;
+
+    margin-top:15px;
+
+    margin-bottom:20px;
+
+}
+
+.conteudo{
+
+    padding:25px;
+
+    flex:1;
+
+}
+
+input{
+
+    width:100%;
+
+    padding:14px;
+
+    margin-top:10px;
+
+    margin-bottom:20px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#eef9ef;
+
+    font-size:16px;
+
+}
+
+select{
+
+    width:100%;
+
+    padding:14px;
+
+    margin-top:10px;
+
+    margin-bottom:20px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:white;
+
+    font-size:16px;
+
+}
+
+button{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:white;
+
+    cursor:pointer;
+
+    margin-top:15px;
+
+    font-size:16px;
+
+    transition:.2s;
+
+}
+
+button:hover{
+
+    transform:scale(1.03);
+
+}
+
+.botao-principal{
+
+    background:#9fd39f;
+
+    color:#244224;
+
+    font-weight:bold;
+
+}
+
+.botao-opcao{
+
+    background:white;
+
+    margin-bottom:18px;
+
+}
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:15px;
+
+}
+
+.card{
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:12px;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    box-shadow:0 2px 5px rgba(0,0,0,.2);
+
+}
+
+.card:hover{
+
+    background:#b8ddb7;
+
+}
+
+.calendario{
+
+    width:100%;
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:20px;
+
+    text-align:center;
+
+}
+
+.dias{
+
+    display:grid;
+
+    grid-template-columns:repeat(7,1fr);
+
+    gap:10px;
+
+    margin-top:20px;
+
+}
+
+.dia{
+
+    width:35px;
+
+    height:35px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    margin:auto;
+
+}
+
+.disponivel{
+
+    background:#ffe85b;
+
+}
+
+.ocupado{
+
+    background:#ff3f3f;
+
+    color:white;
+
+}
+
+.livre{
+
+    background:#f1f1f1;
+
+}
+
+.horario{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:12px;
+
+    text-align:center;
+
+    margin-top:18px;
+
+    cursor:pointer;
+
+}
+
+.horario:hover{
+
+    background:#9fd39f;
+
+}
+
+.sucesso{
+
+    text-align:center;
+
+    font-size:22px;
+
+    margin-top:120px;
+
+    color:#2d6b2d;
+
+}
