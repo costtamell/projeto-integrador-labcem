@@ -1,8 +1,8 @@
-const express=require("express");
+const express = require("express");
 
-const router=express.Router();
+const router = express.Router();
 
-const reservas=require("../data/reservas");
+const reservas = require("../data/reservas");
 
 router.get("/",(req,res)=>{
 
@@ -16,9 +16,9 @@ const{
 
 professor,
 
-materia,
-
 ambiente,
+
+materia,
 
 data,
 
@@ -26,9 +26,7 @@ hora
 
 }=req.body;
 
-const conflito=reservas.find(
-
-r=>
+const existe = reservas.find(r=>
 
 r.ambiente===ambiente &&
 
@@ -38,9 +36,11 @@ r.hora===hora
 
 );
 
-if(conflito){
+if(existe){
 
 return res.status(400).json({
+
+sucesso:false,
 
 mensagem:"Este horário já está reservado."
 
@@ -54,9 +54,9 @@ id:reservas.length+1,
 
 professor,
 
-materia,
-
 ambiente,
+
+materia,
 
 data,
 
@@ -68,7 +68,9 @@ reservas.push(novaReserva);
 
 res.status(201).json({
 
-mensagem:"Reserva realizada com sucesso.",
+sucesso:true,
+
+mensagem:"Reserva realizada.",
 
 novaReserva
 
@@ -100,10 +102,10 @@ reservas.splice(indice,1);
 
 res.json({
 
-mensagem:"Reserva cancelada."
+mensagem:"Reserva removida."
 
 });
 
 });
 
-module.exports=router;
+module.exports = router;
