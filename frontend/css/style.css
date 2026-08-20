@@ -1,275 +1,399 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-body{
-    background:#d9f2df;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
+body {
+    background: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
-.container{
+/* =========================
+   CONTAINER PRINCIPAL
+========================= */
 
-    width:390px;
-    min-height:844px;
-
-    background:#d8f0dc;
-
-    display:flex;
-    flex-direction:column;
-
+.container {
+    width: 390px;
+    min-height: 844px;
+    background: #d8f0dc;
+    display: flex;
+    flex-direction: column;
 }
 
-.topo{
-
-    background:#b8ddb7;
-
-    padding:20px;
-
+.topo {
+    background: #b8ddb7;
+    padding: 20px;
 }
 
-.titulo{
-
-    text-align:center;
-
-    font-size:25px;
-
-    color:#3d3d3d;
-
-    margin-top:15px;
-
-    margin-bottom:20px;
-
+.titulo {
+    text-align: center;
+    font-size: 25px;
+    color: #3d3d3d;
+    margin-top: 15px;
+    margin-bottom: 20px;
 }
 
-.conteudo{
-
-    padding:25px;
-
-    flex:1;
-
+.conteudo {
+    padding: 25px;
+    flex: 1;
 }
 
-input{
-
-    width:100%;
-
-    padding:14px;
-
-    margin-top:10px;
-
-    margin-bottom:20px;
-
-    border:none;
-
-    border-radius:8px;
-
-    background:#eef9ef;
-
-    font-size:16px;
-
+input {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 8px;
+    background: #eef9ef;
+    font-size: 16px;
 }
 
-select{
-
-    width:100%;
-
-    padding:14px;
-
-    margin-top:10px;
-
-    margin-bottom:20px;
-
-    border:none;
-
-    border-radius:8px;
-
-    background:white;
-
-    font-size:16px;
-
+select {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 8px;
+    background: white;
+    font-size: 16px;
 }
 
-button{
-
-    width:100%;
-
-    padding:15px;
-
-    border:none;
-
-    border-radius:12px;
-
-    background:white;
-
-    cursor:pointer;
-
-    margin-top:15px;
-
-    font-size:16px;
-
-    transition:.2s;
-
+button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 16px;
+    transition: 0.2s;
 }
 
-button:hover{
-
-    transform:scale(1.03);
-
+button:hover {
+    transform: scale(1.03);
 }
 
-.botao-principal{
-
-    background:#9fd39f;
-
-    color:#244224;
-
-    font-weight:bold;
-
+.botao-principal {
+    background: #9fd39f;
+    color: #244224;
+    font-weight: bold;
 }
 
-.botao-opcao{
-
-    background:white;
-
-    margin-bottom:18px;
-
+.botao-opcao {
+    background: white;
+    margin-bottom: 18px;
 }
 
-.grid{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:15px;
-
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
 }
 
-.card{
-
-    background:white;
-
-    border-radius:25px;
-
-    padding:12px;
-
-    text-align:center;
-
-    cursor:pointer;
-
-    box-shadow:0 2px 5px rgba(0,0,0,.2);
-
+.card {
+    background: white;
+    border-radius: 25px;
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.card:hover{
-
-    background:#b8ddb7;
-
+.card:hover {
+    background: #b8ddb7;
 }
 
-.calendario{
 
-    width:100%;
+/* =========================
+   TELA DE CALENDÁRIO
+========================= */
 
-    background:white;
+.tela {
+    width: 390px;
+    min-height: 844px;
+    background: #d8f2e7;
 
-    border-radius:20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    padding:20px;
+    padding-top: 45px;
 
-    text-align:center;
-
+    box-sizing: border-box;
 }
 
-.dias{
-
-    display:grid;
-
-    grid-template-columns:repeat(7,1fr);
-
-    gap:10px;
-
-    margin-top:20px;
-
+.tela h2 {
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 25px;
+    color: #444;
 }
 
-.dia{
 
-    width:35px;
+/* =========================
+   CALENDÁRIO
+========================= */
 
-    height:35px;
-
-    border-radius:50%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    cursor:pointer;
-
-    margin:auto;
-
+.calendario {
+    width: 176px;
+    background: white;
+    border: 1px solid #777;
+    border-radius: 13px;
+    overflow: hidden;
+    padding: 0;
+    text-align: center;
 }
 
-.disponivel{
+.cabecalho-calendario {
+    width: 100%;
+    height: 38px;
 
-    background:#ffe85b;
+    background: #b3dcb9;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+    font-weight: 500;
 }
 
-.ocupado{
+.dias-semana {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
 
-    background:#ff3f3f;
+    padding: 7px 7px 3px;
 
-    color:white;
-
+    font-size: 10px;
+    font-weight: bold;
 }
 
-.livre{
+.dias {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
 
-    background:#f1f1f1;
+    padding: 2px 7px 12px;
 
+    row-gap: 2px;
 }
 
-.horario{
+.dias span,
+.dias button {
+    width: 22px;
+    height: 22px;
 
-    background:white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    border-radius:20px;
+    border: none;
+    background: transparent;
 
-    padding:12px;
+    font-size: 11px;
+    font-weight: 600;
 
-    text-align:center;
-
-    margin-top:18px;
-
-    cursor:pointer;
-
+    padding: 0;
+    margin: auto;
 }
 
-.horario:hover{
-
-    background:#9fd39f;
-
+.dias .fora {
+    color: #aaa;
 }
 
-.sucesso{
-
-    text-align:center;
-
-    font-size:22px;
-
-    margin-top:120px;
-
-    color:#2d6b2d;
-
+.dias .reservado {
+    background: #ff2525;
+    border-radius: 50%;
+    color: #000;
 }
 
+.dias .disponivel {
+    background: #f5f547;
+    border: 1px solid #555;
+    border-radius: 50%;
+    color: #000;
+    cursor: pointer;
+}
+
+.dias .disponivel:hover {
+    transform: scale(1.08);
+}
+
+
+/* =========================
+   LEGENDA
+========================= */
+
+.legenda {
+    width: 176px;
+
+    margin-top: 25px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.legenda-item {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 8px;
+
+    white-space: nowrap;
+}
+
+.bolinha {
+    width: 24px;
+    height: 24px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    border: 1px solid #777;
+}
+
+.vermelho {
+    background: #ff2525;
+}
+
+.amarelo {
+    background: #f5f547;
+}
+
+
+/* =========================
+   HORÁRIOS
+========================= */
+
+.horarios {
+    margin-top: 18px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 9px;
+}
+
+.horarios button {
+    width: 100px;
+    height: 21px;
+
+    padding: 0;
+    margin: 0;
+
+    border: none;
+    border-radius: 15px;
+
+    background: white;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.horarios button:hover {
+    background: #eeeeee;
+    transform: scale(1.03);
+}
+
+
+/* =========================
+   HORÁRIO INDISPONÍVEL
+========================= */
+
+.horarios .indisponivel {
+    background: #ff2525;
+    color: #000;
+    cursor: not-allowed;
+}
+
+.horarios .indisponivel:hover {
+    transform: none;
+}
+
+
+/* =========================
+   TELA DE SUCESSO
+========================= */
+
+.sucesso {
+    text-align: center;
+    font-size: 22px;
+    margin-top: 120px;
+    color: #2d6b2d;
+}
+
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+/* Celular */
+@media (max-width: 430px) {
+
+    body {
+        background: #d8f2e7;
+        align-items: flex-start;
+    }
+
+    .tela {
+        width: 100%;
+        min-height: 100vh;
+    }
+
+    .container {
+        width: 100%;
+        min-height: 100vh;
+    }
+}
+
+
+/* Computador */
+@media (min-width: 431px) {
+
+    body {
+        background: #222;
+    }
+
+    .tela {
+        width: 390px;
+        min-height: 844px;
+    }
+}
+
+.botao-continuar {
+    width: 100px;
+    height: 30px;
+
+    margin-top: 25px;
+    padding: 0;
+
+    border: none;
+    border-radius: 15px;
+
+    background: white;
+
+    font-size: 10px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.botao-continuar:hover {
+    background: #b8ddb7;
+    transform: scale(1.03);
+}
