@@ -4,38 +4,29 @@ const router = express.Router();
 
 const usuarios = require("../data/usuarios");
 
-router.post("/", (req,res)=>{
+router.post("/", (req, res) => {
 
-const {email,senha} = req.body;
+    const { email, senha } = req.body;
 
-const usuario = usuarios.find(u=>
+    const usuario = usuarios.find(u =>
+        u.email === email &&
+        u.senha === senha
+    );
 
-u.email===email &&
-u.senha===senha
+    if (usuario) {
 
-);
+        return res.json({
+            sucesso: true,
+            mensagem: "Login realizado.",
+            usuario
+        });
 
-if(usuario){
+    }
 
-return res.json({
-
-sucesso:true,
-
-mensagem:"Login realizado.",
-
-usuario
-
-});
-
-}
-
-return res.status(401).json({
-
-sucesso:false,
-
-mensagem:"Email ou senha incorretos."
-
-});
+    return res.status(401).json({
+        sucesso: false,
+        mensagem: "Email ou senha incorretos."
+    });
 
 });
 
