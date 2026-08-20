@@ -1,47 +1,52 @@
-async function login(){
+async function login() {
 
-const email=document.getElementById("email").value;
+    const email = document.getElementById("email").value;
 
-const senha=document.getElementById("senha").value;
+    const senha = document.getElementById("senha").value;
 
-const resposta=await fetch("http://localhost:3000/login",{
+    try {
 
-method:"POST",
+        const resposta = await fetch(
+            "http://localhost:3000/login",
+            {
+                method: "POST",
 
-headers:{
+                headers: {
+                    "Content-Type": "application/json"
+                },
 
-"Content-Type":"application/json"
+                body: JSON.stringify({
+                    email,
+                    senha
+                })
+            }
+        );
 
-},
+        const dados = await resposta.json();
 
-body:JSON.stringify({
+        console.log("Resposta do servidor:", dados);
 
-email,
+        if (resposta.ok) {
 
-senha
+            localStorage.setItem(
+                "usuario",
+                JSON.stringify(dados.usuario)
+            );
 
-})
+            window.location.href = "ambientes.html";
 
-});
+        } else {
 
-const dados=await resposta.json();
+            alert(dados.mensagem);
 
-if(resposta.ok){
+        }
 
-localStorage.setItem(
+    } catch (erro) {
 
-"usuario",
+        console.error("Erro:", erro);
 
-JSON.stringify(dados.usuario)
+        alert("Não foi possível conectar ao servidor.");
 
-);
-
-window.location="ambientes.html";
-
-}else{
-
-alert(dados.mensagem);
-
-}
+    }
 
 }
