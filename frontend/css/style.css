@@ -1,83 +1,49 @@
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
-    background: #222;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
 }
-
-/* =========================
-   CONTAINER PRINCIPAL
-========================= */
 
 .container {
-    width: 390px;
-    min-height: 844px;
-    background: #d8f0dc;
-    display: flex;
-    flex-direction: column;
-}
-
-.topo {
-    background: #b8ddb7;
-    padding: 20px;
-}
-
-.titulo {
+    width: 90%;
+    max-width: 500px;
+    margin: 60px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
     text-align: center;
-    font-size: 25px;
-    color: #3d3d3d;
-    margin-top: 15px;
-    margin-bottom: 20px;
 }
 
-.conteudo {
-    padding: 25px;
-    flex: 1;
+h1,
+h2 {
+    margin-bottom: 25px;
 }
 
 input {
     width: 100%;
-    padding: 14px;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    border: none;
-    border-radius: 8px;
-    background: #eef9ef;
-    font-size: 16px;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-select {
+button,
+.btn {
     width: 100%;
-    padding: 14px;
-    margin-top: 10px;
-    margin-bottom: 20px;
+    padding: 12px;
+    margin: 8px 0;
     border: none;
-    border-radius: 8px;
-    background: white;
-    font-size: 16px;
-}
-
-button {
-    width: 100%;
-    padding: 15px;
-    border: none;
-    border-radius: 12px;
-    background: white;
+    border-radius: 5px;
     cursor: pointer;
-    margin-top: 15px;
     font-size: 16px;
-    transition: 0.2s;
 }
 
 button:hover {
+<<<<<<< HEAD
     transform: scale(1.03);
 }
 
@@ -457,4 +423,7 @@ button:hover {
     border: 1px solid #555;
     border-radius: 50%;
     color: #000;
+=======
+    opacity: 0.85;
+>>>>>>> d340a38258b0f60ead59b237eb09ea6245a755ea
 }
