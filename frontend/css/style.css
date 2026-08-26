@@ -397,3 +397,64 @@ button:hover {
     background: #b8ddb7;
     transform: scale(1.03);
 }
+/* =====================================
+   TELA DE HORÁRIOS
+   ===================================== */
+
+#lista-horarios {
+    width: 120px;
+    margin: 18px auto 0;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+#lista-horarios .horario {
+    width: 120px;
+    height: 24px;
+
+    margin: 0;
+    padding: 0;
+
+    border: none;
+    border-radius: 15px;
+
+    background-color: white;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+#lista-horarios .horario:hover {
+    background-color: #b3dcb9;
+    transform: scale(1.03);
+}
+
+
+/* =====================================
+   CORES DO CALENDÁRIO
+   ===================================== */
+
+/* Dia vermelho */
+.dias .reservado {
+    background-color: #ff2525 !important;
+    border-radius: 50%;
+    color: #000;
+}
+
+
+/* Dia amarelo */
+.dias .disponivel {
+    background-color: #f5f547 !important;
+    border: 1px solid #555;
+    border-radius: 50%;
+    color: #000;
+}

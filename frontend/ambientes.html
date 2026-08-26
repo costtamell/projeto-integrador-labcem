@@ -3,78 +3,31 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Ambientes</title>
+    <title>LabCem - Ambientes</title>
 
-<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
 </head>
 
 <body>
 
-<div class="container">
+    <div class="container">
 
-<div class="topo">
+        <h1>Escolha o ambiente</h1>
 
-<h2 class="titulo">
+        <div id="ambientes"></div>
 
-ATENÇÃO PROFESSORES
+        <button onclick="logout()">
+            Sair
+        </button>
 
-Para plataformas online, usar 
-tablets e chromebooks disponíveis
+    </div>
 
-</h2>
-
-</div>
-
-<div class="conteudo">
-
-<div class="card" onclick="selecionar('Tablets')">
-
-<h3>📱</h3>
-
-<h2>TABLETS</h2>
-
-</div>
-
-<br>
-
-<div class="card" onclick="selecionar('Chromebooks')">
-
-<h3>💻</h3>
-
-<h2>CHROMEBOOKS</h2>
-
-</div>
-
-<br>
-
-<div class="card" onclick="selecionar('Laboratório 1')">
-
-<h3>🖥️</h3>
-
-<h2>LABORATÓRIO 1</h2>
-
-</div>
-
-<br>
-
-<div class="card" onclick="selecionar('Laboratório 2')">
-
-<h3>🖥️</h3>
-
-<h2>LABORATÓRIO 2</h2>
-
-</div>
-
-</div>
-
-</div>
-
-<script src="js/ambientes.js"></script>
+    <script src="js/ambientes.js"></script>
 
 </body>
 
