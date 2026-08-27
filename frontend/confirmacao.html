@@ -3,61 +3,79 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<title>Reserva Concluída</title>
+    <title>Confirmação</title>
 
-<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
 </head>
 
 <body>
 
-<div class="container">
+    <div class="container">
 
-<div class="conteudo">
+        <h1>Reserva realizada!</h1>
 
-<div class="sucesso">
+        <p id="resultado"></p>
 
-<h1>✅</h1>
+        <button onclick="voltarInicio()">
+            Voltar para o início
+        </button>
 
-<h2>Reserva realizada!</h2>
+    </div>
 
-<br>
 
-<p>
+    <script>
 
-Seu laboratório foi reservado com sucesso.
+        const ambiente =
+            localStorage.getItem("ambiente");
 
-</p>
+        const materia =
+            localStorage.getItem("materia");
 
-<br><br>
+        const data =
+            localStorage.getItem("data");
 
-<button
-class="botao-principal"
-onclick="voltar()">
+        const hora =
+            localStorage.getItem("hora");
 
-Nova Reserva
 
-</button>
+        document.getElementById(
+            "resultado"
+        ).innerHTML = `
 
-</div>
+            <strong>Ambiente:</strong>
+            ${ambiente}
+            <br><br>
 
-</div>
+            <strong>Matéria:</strong>
+            ${materia}
+            <br><br>
 
-</div>
+            <strong>Data:</strong>
+            ${data}
+            <br><br>
 
-<script>
+            <strong>Horário:</strong>
+            ${hora}
 
-function voltar(){
+        `;
 
-window.location="ambientes.html";
 
-}
+        function voltarInicio() {
 
-</script>
+            window.location.href =
+                "ambientes.html";
+
+        }
+
+    </script>
 
 </body>
 
