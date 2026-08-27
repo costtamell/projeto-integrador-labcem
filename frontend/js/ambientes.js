@@ -89,6 +89,10 @@ async function logout() {
 }
 
 
+<<<<<<< HEAD
 carregarAmbientes();
 
     
+=======
+carregarAmbientes();
+>>>>>>> f4ef12cbd1760d202577eec31225868960d6b599

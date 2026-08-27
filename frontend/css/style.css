@@ -43,5 +43,387 @@ button,
 }
 
 button:hover {
+<<<<<<< HEAD
+    transform: scale(1.03);
+}
+
+.botao-principal {
+    background: #9fd39f;
+    color: #244224;
+    font-weight: bold;
+}
+
+.botao-opcao {
+    background: white;
+    margin-bottom: 18px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.card {
+    background: white;
+    border-radius: 25px;
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover {
+    background: #b8ddb7;
+}
+
+
+/* =========================
+   TELA DE CALENDÁRIO
+========================= */
+
+.tela {
+    width: 390px;
+    min-height: 844px;
+    background: #d8f2e7;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding-top: 45px;
+
+    box-sizing: border-box;
+}
+
+.tela h2 {
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 25px;
+    color: #444;
+}
+
+
+/* =========================
+   CALENDÁRIO
+========================= */
+
+.calendario {
+    width: 176px;
+    background: white;
+    border: 1px solid #777;
+    border-radius: 13px;
+    overflow: hidden;
+    padding: 0;
+    text-align: center;
+}
+
+.cabecalho-calendario {
+    width: 100%;
+    height: 38px;
+
+    background: #b3dcb9;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.dias-semana {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+
+    padding: 7px 7px 3px;
+
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.dias {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+
+    padding: 2px 7px 12px;
+
+    row-gap: 2px;
+}
+
+.dias span,
+.dias button {
+    width: 22px;
+    height: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    background: transparent;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    padding: 0;
+    margin: auto;
+}
+
+.dias .fora {
+    color: #aaa;
+}
+
+.dias .reservado {
+    background: #ff2525;
+    border-radius: 50%;
+    color: #000;
+}
+
+.dias .disponivel {
+    background: #f5f547;
+    border: 1px solid #555;
+    border-radius: 50%;
+    color: #000;
+    cursor: pointer;
+}
+
+.dias .disponivel:hover {
+    transform: scale(1.08);
+}
+
+
+/* =========================
+   LEGENDA
+========================= */
+
+.legenda {
+    width: 176px;
+
+    margin-top: 25px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.legenda-item {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 8px;
+
+    white-space: nowrap;
+}
+
+.bolinha {
+    width: 24px;
+    height: 24px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    border: 1px solid #777;
+}
+
+.vermelho {
+    background: #ff2525;
+}
+
+.amarelo {
+    background: #f5f547;
+}
+
+
+/* =========================
+   HORÁRIOS
+========================= */
+
+.horarios {
+    margin-top: 18px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 9px;
+}
+
+.horarios button {
+    width: 100px;
+    height: 21px;
+
+    padding: 0;
+    margin: 0;
+
+    border: none;
+    border-radius: 15px;
+
+    background: white;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.horarios button:hover {
+    background: #eeeeee;
+    transform: scale(1.03);
+}
+
+
+/* =========================
+   HORÁRIO INDISPONÍVEL
+========================= */
+
+.horarios .indisponivel {
+    background: #ff2525;
+    color: #000;
+    cursor: not-allowed;
+}
+
+.horarios .indisponivel:hover {
+    transform: none;
+}
+
+
+/* =========================
+   TELA DE SUCESSO
+========================= */
+
+.sucesso {
+    text-align: center;
+    font-size: 22px;
+    margin-top: 120px;
+    color: #2d6b2d;
+}
+
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+/* Celular */
+@media (max-width: 430px) {
+
+    body {
+        background: #d8f2e7;
+        align-items: flex-start;
+    }
+
+    .tela {
+        width: 100%;
+        min-height: 100vh;
+    }
+
+    .container {
+        width: 100%;
+        min-height: 100vh;
+    }
+}
+
+
+/* Computador */
+@media (min-width: 431px) {
+
+    body {
+        background: #222;
+    }
+
+    .tela {
+        width: 390px;
+        min-height: 844px;
+    }
+}
+
+.botao-continuar {
+    width: 100px;
+    height: 30px;
+
+    margin-top: 25px;
+    padding: 0;
+
+    border: none;
+    border-radius: 15px;
+
+    background: white;
+
+    font-size: 10px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.botao-continuar:hover {
+    background: #b8ddb7;
+    transform: scale(1.03);
+}
+/* =====================================
+   TELA DE HORÁRIOS
+   ===================================== */
+
+#lista-horarios {
+    width: 120px;
+    margin: 18px auto 0;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+#lista-horarios .horario {
+    width: 120px;
+    height: 24px;
+
+    margin: 0;
+    padding: 0;
+
+    border: none;
+    border-radius: 15px;
+
+    background-color: white;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+#lista-horarios .horario:hover {
+    background-color: #b3dcb9;
+    transform: scale(1.03);
+}
+
+
+/* =====================================
+   CORES DO CALENDÁRIO
+   ===================================== */
+
+/* Dia vermelho */
+.dias .reservado {
+    background-color: #ff2525 !important;
+    border-radius: 50%;
+    color: #000;
+}
+
+
+/* Dia amarelo */
+.dias .disponivel {
+    background-color: #f5f547 !important;
+    border: 1px solid #555;
+    border-radius: 50%;
+    color: #000;
+=======
     opacity: 0.85;
+>>>>>>> d340a38258b0f60ead59b237eb09ea6245a755ea
 }

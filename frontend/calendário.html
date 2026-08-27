@@ -60,6 +60,7 @@ ESCOLHA O DIA
 
         <h2>SELECIONE O DIA:</h2>
 
+        <!-- CALENDÁRIO -->
         <section class="calendario">
 
             <div class="cabecalho-calendario">
@@ -78,44 +79,102 @@ ESCOLHA O DIA
 
             <div class="dias">
 
+                <!-- DIAS DO MÊS ANTERIOR -->
                 <span class="fora">28</span>
                 <span class="fora">29</span>
                 <span class="fora">30</span>
 
+                <!-- DIA 1 -->
                 <button class="dia" onclick="selecionarDia(1)">1</button>
+
+                <!-- DIA 2 -->
                 <button class="dia" onclick="selecionarDia(2)">2</button>
-                <button class="dia" onclick="selecionarDia(3)">3</button>
+
+                <!-- DIA 3 - TOTALMENTE RESERVADO -->
+                <button class="dia reservado">3</button>
+
+                <!-- DIA 4 -->
                 <button class="dia" onclick="selecionarDia(4)">4</button>
 
+                <!-- DIA 5 -->
                 <button class="dia" onclick="selecionarDia(5)">5</button>
+
+                <!-- DIA 6 - AINDA TEM HORÁRIOS -->
                 <button class="dia disponivel" onclick="selecionarDia(6)">6</button>
+
+                <!-- DIA 7 -->
                 <button class="dia" onclick="selecionarDia(7)">7</button>
+
+                <!-- DIA 8 -->
                 <button class="dia" onclick="selecionarDia(8)">8</button>
+
+                <!-- DIA 9 -->
                 <button class="dia" onclick="selecionarDia(9)">9</button>
+
+                <!-- DIA 10 -->
                 <button class="dia" onclick="selecionarDia(10)">10</button>
+
+                <!-- DIA 11 -->
                 <button class="dia" onclick="selecionarDia(11)">11</button>
 
+                <!-- DIA 12 -->
                 <button class="dia" onclick="selecionarDia(12)">12</button>
+
+                <!-- DIA 13 -->
                 <button class="dia" onclick="selecionarDia(13)">13</button>
+
+                <!-- DIA 14 -->
                 <button class="dia" onclick="selecionarDia(14)">14</button>
-                <button class="dia" onclick="selecionarDia(15)">15</button>
+
+                <!-- DIA 15 - TOTALMENTE RESERVADO -->
+                <button class="dia reservado">15</button>
+
+                <!-- DIA 16 -->
                 <button class="dia" onclick="selecionarDia(16)">16</button>
+
+                <!-- DIA 17 -->
                 <button class="dia" onclick="selecionarDia(17)">17</button>
+
+                <!-- DIA 18 -->
                 <button class="dia" onclick="selecionarDia(18)">18</button>
 
+                <!-- DIA 19 -->
                 <button class="dia" onclick="selecionarDia(19)">19</button>
+
+                <!-- DIA 20 -->
                 <button class="dia" onclick="selecionarDia(20)">20</button>
+
+                <!-- DIA 21 -->
                 <button class="dia" onclick="selecionarDia(21)">21</button>
+
+                <!-- DIA 22 -->
                 <button class="dia" onclick="selecionarDia(22)">22</button>
+
+                <!-- DIA 23 -->
                 <button class="dia" onclick="selecionarDia(23)">23</button>
+
+                <!-- DIA 24 -->
                 <button class="dia" onclick="selecionarDia(24)">24</button>
+
+                <!-- DIA 25 -->
                 <button class="dia" onclick="selecionarDia(25)">25</button>
 
+                <!-- DIA 26 -->
                 <button class="dia" onclick="selecionarDia(26)">26</button>
+
+                <!-- DIA 27 -->
                 <button class="dia" onclick="selecionarDia(27)">27</button>
+
+                <!-- DIA 28 -->
                 <button class="dia" onclick="selecionarDia(28)">28</button>
+
+                <!-- DIA 29 -->
                 <button class="dia" onclick="selecionarDia(29)">29</button>
+
+                <!-- DIA 30 -->
                 <button class="dia" onclick="selecionarDia(30)">30</button>
+
+                <!-- DIA 31 -->
                 <button class="dia" onclick="selecionarDia(31)">31</button>
 
             </div>
@@ -123,16 +182,24 @@ ESCOLHA O DIA
         </section>
 
 
+        <!-- LEGENDA -->
         <section class="legenda">
 
             <div class="legenda-item">
+
                 <span class="bolinha vermelho"></span>
+
                 <span>RESERVADO TODOS OS HORÁRIOS</span>
+
             </div>
 
+
             <div class="legenda-item">
+
                 <span class="bolinha amarelo"></span>
-                <span>AINDA HORÁRIOS DISPONÍVEIS</span>
+
+                <span>AINDA HÁ HORÁRIOS DISPONÍVEIS</span>
+
             </div>
 
         </section>
@@ -140,6 +207,7 @@ ESCOLHA O DIA
     </main>
 
 
+    <!-- JAVASCRIPT DO CALENDÁRIO -->
     <script src="js/calendario.js"></script>
 >>>>>>> f645f3866d81ef3f556e689b341ec4ad1bcfaf7b
 
