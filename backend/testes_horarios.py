@@ -47,4 +47,5 @@ def test_horarios():
 
 if __name__ == "__main__":
     test_horarios()
-python testes_horarios.py
+
+
