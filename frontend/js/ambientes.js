@@ -2,18 +2,25 @@ async function carregarAmbientes() {
 
     const token = localStorage.getItem("token");
 
+    console.log("Token recebido na página ambientes:", token);
+
     if (!token) {
+
+        alert("Você precisa fazer login.");
 
         window.location.href = "index.html";
 
         return;
+
     }
 
     try {
 
         const resposta = await fetch(
-            "http://localhost:5000/ambientes",
+            "http://127.0.0.1:5000/ambientes",
             {
+                method: "GET",
+
                 headers: {
                     "Authorization": token
                 }
@@ -22,20 +29,21 @@ async function carregarAmbientes() {
 
         const dados = await resposta.json();
 
+        console.log("Resposta dos ambientes:", dados);
+
         if (!resposta.ok) {
 
             alert(dados.mensagem);
 
-            window.location.href = "index.html";
-
             return;
+
         }
 
         const div = document.getElementById("ambientes");
 
         div.innerHTML = "";
 
-        dados.forEach(ambiente => {
+        dados.forEach(function(ambiente) {
 
             const botao = document.createElement("button");
 
@@ -48,8 +56,8 @@ async function carregarAmbientes() {
                     ambiente.nome
                 );
 
-                window.location.href =
-                    "materias.html";
+                window.location.href = "materias.html";
+
             };
 
             div.appendChild(botao);
@@ -57,14 +65,17 @@ async function carregarAmbientes() {
             div.appendChild(
                 document.createElement("br")
             );
+
         });
 
     } catch (erro) {
 
-        console.error(erro);
+        console.error("Erro:", erro);
 
         alert("Erro ao carregar ambientes.");
+
     }
+
 }
 
 
@@ -72,20 +83,29 @@ async function logout() {
 
     const token = localStorage.getItem("token");
 
-    await fetch(
-        "http://localhost:5000/logout",
-        {
-            method: "POST",
+    try {
 
-            headers: {
-                "Authorization": token
+        await fetch(
+            "http://127.0.0.1:5000/logout",
+            {
+                method: "POST",
+
+                headers: {
+                    "Authorization": token
+                }
             }
-        }
-    );
+        );
+
+    } catch (erro) {
+
+        console.error(erro);
+
+    }
 
     localStorage.clear();
 
     window.location.href = "index.html";
+
 }
 
 
