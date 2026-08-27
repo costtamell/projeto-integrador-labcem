@@ -8,20 +8,24 @@ from data.horarios import horarios
 from data.reservas import reservas
 
 
+# ==========================================
+# CRIA O APLICATIVO FLASK
+# ==========================================
+
 app = Flask(__name__)
 
 CORS(app)
 
 
 # ==========================================
-# SESSÕES
+# SESSÕES ATIVAS
 # ==========================================
 
 sessoes = []
 
 
 # ==========================================
-# FUNÇÃO PARA VERIFICAR LOGIN
+# FUNÇÃO PARA VERIFICAR O TOKEN
 # ==========================================
 
 def autenticar():
@@ -34,9 +38,22 @@ def autenticar():
     for sessao in sessoes:
 
         if sessao["token"] == token:
+
             return sessao
 
     return None
+
+
+# ==========================================
+# TESTE DO SERVIDOR
+# ==========================================
+
+@app.route("/", methods=["GET"])
+def inicio():
+
+    return jsonify({
+        "mensagem": "Servidor Python do LabCem funcionando!"
+    })
 
 
 # ==========================================
@@ -48,32 +65,63 @@ def login():
 
     dados = request.get_json()
 
+    # Verifica se recebeu os dados
+    if not dados:
+
+        return jsonify({
+            "mensagem": "Dados não enviados."
+        }), 400
+
+
     email = dados.get("email")
     senha = dados.get("senha")
 
-    usuario = None
 
-    for u in usuarios:
+    # Verifica se os campos foram enviados
+    if not email or not senha:
 
-        if u["email"] == email and u["senha"] == senha:
+        return jsonify({
+            "mensagem": "E-mail e senha são obrigatórios."
+        }), 400
 
-            usuario = u
+
+    usuario_encontrado = None
+
+
+    # Procura o usuário
+    for usuario in usuarios:
+
+        if (
+            usuario["email"] == email
+            and usuario["senha"] == senha
+        ):
+
+            usuario_encontrado = usuario
+
             break
 
-    if usuario is None:
+
+    # Usuário não encontrado
+    if usuario_encontrado is None:
 
         return jsonify({
             "sucesso": False,
             "mensagem": "E-mail ou senha incorretos."
         }), 401
 
+
+    # Cria um token
     token = secrets.token_hex(16)
 
+
+    # Salva a sessão
     sessoes.append({
         "token": token,
-        "usuario_id": usuario["id"]
+        "usuario_id": usuario_encontrado["id"]
     })
 
+
+    # Retorna os dados para o site
     return jsonify({
 
         "sucesso": True,
@@ -83,36 +131,16 @@ def login():
         "token": token,
 
         "usuario": {
-            "id": usuario["id"],
-            "nome": usuario["nome"],
-            "email": usuario["email"]
+
+            "id": usuario_encontrado["id"],
+
+            "nome": usuario_encontrado["nome"],
+
+            "email": usuario_encontrado["email"]
+
         }
 
     }), 200
-
-
-# ==========================================
-# LOGOUT
-# ==========================================
-
-@app.route("/logout", methods=["POST"])
-def logout():
-
-    token = request.headers.get("Authorization")
-
-    for sessao in sessoes:
-
-        if sessao["token"] == token:
-
-            sessoes.remove(sessao)
-
-            return jsonify({
-                "mensagem": "Logout realizado com sucesso!"
-            })
-
-    return jsonify({
-        "mensagem": "Token inválido."
-    }), 401
 
 
 # ==========================================
@@ -124,11 +152,14 @@ def listar_ambientes():
 
     sessao = autenticar()
 
+
+    # Verifica o token
     if sessao is None:
 
         return jsonify({
-            "mensagem": "Acesso negado. Faça login."
+            "mensagem": "Acesso negado. Faça login novamente."
         }), 401
+
 
     ambientes = [
 
@@ -149,7 +180,8 @@ def listar_ambientes():
 
     ]
 
-    return jsonify(ambientes)
+
+    return jsonify(ambientes), 200
 
 
 # ==========================================
@@ -161,17 +193,19 @@ def listar_materias():
 
     sessao = autenticar()
 
+
     if sessao is None:
 
         return jsonify({
-            "mensagem": "Acesso negado. Faça login."
+            "mensagem": "Acesso negado. Faça login novamente."
         }), 401
 
-    return jsonify(materias)
+
+    return jsonify(materias), 200
 
 
 # ==========================================
-# HORÁRIOS
+# HORÁRIOS DISPONÍVEIS
 # ==========================================
 
 @app.route("/horarios", methods=["GET"])
@@ -179,21 +213,37 @@ def listar_horarios():
 
     sessao = autenticar()
 
+
     if sessao is None:
 
         return jsonify({
-            "mensagem": "Acesso negado. Faça login."
+            "mensagem": "Acesso negado. Faça login novamente."
         }), 401
 
+
     ambiente = request.args.get("ambiente")
+
     data = request.args.get("data")
+
+
+    # Verifica se ambiente e data foram enviados
+    if not ambiente or not data:
+
+        return jsonify({
+            "mensagem": "Ambiente e data são obrigatórios."
+        }), 400
+
 
     horarios_disponiveis = []
 
+
+    # Verifica cada horário
     for hora in horarios:
 
         ocupado = False
 
+
+        # Procura reservas existentes
         for reserva in reservas:
 
             if (
@@ -203,13 +253,17 @@ def listar_horarios():
             ):
 
                 ocupado = True
+
                 break
 
+
+        # Se não estiver ocupado, adiciona
         if not ocupado:
 
             horarios_disponiveis.append(hora)
 
-    return jsonify(horarios_disponiveis)
+
+    return jsonify(horarios_disponiveis), 200
 
 
 # ==========================================
@@ -221,21 +275,42 @@ def criar_reserva():
 
     sessao = autenticar()
 
+
     if sessao is None:
 
         return jsonify({
-            "mensagem": "Acesso negado. Faça login."
+            "mensagem": "Acesso negado. Faça login novamente."
         }), 401
+
 
     dados = request.get_json()
 
+
+    if not dados:
+
+        return jsonify({
+            "mensagem": "Dados da reserva não enviados."
+        }), 400
+
+
     ambiente = dados.get("ambiente")
+
     materia = dados.get("materia")
+
     data = dados.get("data")
+
     hora = dados.get("hora")
 
-    # Verifica se já existe reserva
 
+    # Verifica os campos
+    if not ambiente or not materia or not data or not hora:
+
+        return jsonify({
+            "mensagem": "Preencha todos os dados da reserva."
+        }), 400
+
+
+    # Verifica se o horário já está reservado
     for reserva in reservas:
 
         if (
@@ -248,6 +323,8 @@ def criar_reserva():
                 "mensagem": "Este horário já está reservado."
             }), 400
 
+
+    # Cria a nova reserva
     nova_reserva = {
 
         "id": len(reservas) + 1,
@@ -264,7 +341,10 @@ def criar_reserva():
 
     }
 
+
+    # Salva a reserva
     reservas.append(nova_reserva)
+
 
     return jsonify({
 
@@ -284,13 +364,49 @@ def listar_reservas():
 
     sessao = autenticar()
 
+
     if sessao is None:
 
         return jsonify({
-            "mensagem": "Acesso negado."
+            "mensagem": "Acesso negado. Faça login novamente."
         }), 401
 
-    return jsonify(reservas)
+
+    return jsonify(reservas), 200
+
+
+# ==========================================
+# LOGOUT
+# ==========================================
+
+@app.route("/logout", methods=["POST"])
+def logout():
+
+    token = request.headers.get("Authorization")
+
+
+    if not token:
+
+        return jsonify({
+            "mensagem": "Token não informado."
+        }), 401
+
+
+    for sessao in sessoes:
+
+        if sessao["token"] == token:
+
+            sessoes.remove(sessao)
+
+
+            return jsonify({
+                "mensagem": "Logout realizado com sucesso!"
+            }), 200
+
+
+    return jsonify({
+        "mensagem": "Token inválido."
+    }), 401
 
 
 # ==========================================
@@ -299,14 +415,15 @@ def listar_reservas():
 
 if __name__ == "__main__":
 
-    print("================================")
-    print("      LABCEM - SERVIDOR")
-    print("================================")
-    print("Servidor Python iniciado!")
-    print("http://localhost:5000")
+    print("========================================")
+    print("      LABCEM - SERVIDOR PYTHON")
+    print("========================================")
+    print("Servidor iniciado!")
+    print("Endereço: http://127.0.0.1:5000")
+    print("========================================")
 
     app.run(
-        host="localhost",
+        host="127.0.0.1",
         port=5000,
         debug=True
     )

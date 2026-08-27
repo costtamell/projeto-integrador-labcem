@@ -1,19 +1,17 @@
 async function login() {
 
-    const email = document.getElementById("email").value;
-    const senha = document.getElementById("senha").value;
+    const email = document.getElementById("email").value.trim();
+    const senha = document.getElementById("senha").value.trim();
 
     if (email === "" || senha === "") {
-
         alert("Preencha o e-mail e a senha.");
-
         return;
     }
 
     try {
 
         const resposta = await fetch(
-            "http://localhost:5000/login",
+            "http://127.0.0.1:5000/login",
             {
                 method: "POST",
 
@@ -30,18 +28,23 @@ async function login() {
 
         const dados = await resposta.json();
 
-        console.log(dados);
+        console.log("Resposta do login:", dados);
 
         if (resposta.ok) {
 
-            localStorage.setItem(
-                "token",
-                dados.token
-            );
+            // GUARDA O TOKEN
+            localStorage.setItem("token", dados.token);
 
+            // GUARDA O USUÁRIO
             localStorage.setItem(
                 "usuario",
                 JSON.stringify(dados.usuario)
+            );
+
+            // TESTE: mostra se o token foi salvo
+            console.log(
+                "Token salvo:",
+                localStorage.getItem("token")
             );
 
             alert("Login realizado com sucesso!");
@@ -51,14 +54,15 @@ async function login() {
         } else {
 
             alert(dados.mensagem);
+
         }
 
     } catch (erro) {
 
-        console.error(erro);
+        console.error("Erro:", erro);
 
-        alert(
-            "Não foi possível conectar ao servidor Python."
-        );
+        alert("Não foi possível conectar ao servidor Python.");
+
     }
+
 }
