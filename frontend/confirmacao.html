@@ -5,12 +5,9 @@
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Confirmação</title>
+    <title>Reserva Concluída</title>
 
     <link rel="stylesheet" href="css/style.css">
 
@@ -20,62 +17,51 @@
 
     <div class="container">
 
-        <h1>Reserva realizada!</h1>
+        <div class="conteudo">
 
-        <p id="resultado"></p>
+            <div class="sucesso">
 
-        <button onclick="voltarInicio()">
-            Voltar para o início
-        </button>
+                <h1>✅</h1>
+
+                <h2>Reserva realizada!</h2>
+
+                <br>
+
+                <p>
+                    Sua reserva foi realizada com sucesso.
+                </p>
+
+                <br>
+
+                <div id="dadosReserva">
+
+                </div>
+
+                <br><br>
+
+                <button
+                    class="botao-principal"
+                    onclick="novaReserva()">
+
+                    Nova Reserva
+
+                </button>
+
+                <button
+                    class="botao-principal"
+                    onclick="verReservas()">
+
+                    Minhas Reservas
+
+                </button>
+
+            </div>
+
+        </div>
 
     </div>
 
-
-    <script>
-
-        const ambiente =
-            localStorage.getItem("ambiente");
-
-        const materia =
-            localStorage.getItem("materia");
-
-        const data =
-            localStorage.getItem("data");
-
-        const hora =
-            localStorage.getItem("hora");
-
-
-        document.getElementById(
-            "resultado"
-        ).innerHTML = `
-
-            <strong>Ambiente:</strong>
-            ${ambiente}
-            <br><br>
-
-            <strong>Matéria:</strong>
-            ${materia}
-            <br><br>
-
-            <strong>Data:</strong>
-            ${data}
-            <br><br>
-
-            <strong>Horário:</strong>
-            ${hora}
-
-        `;
-
-
-        function voltarInicio() {
-
-            window.location.href =
-                "ambientes.html";
-
-        }
-
-    </script>
+    <script src="js/confirmacao.js"></script>
 
 </body>
 

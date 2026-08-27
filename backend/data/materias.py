@@ -9,10 +9,18 @@ materias = [
     },
     {
         "id": 3,
-        "nome": "Desenvolvimento Web"
+        "nome": "Desenvolvimento de Sistemas"
     },
     {
         "id": 4,
-        "nome": "Redes de Computadores"
+        "nome": "Pensamento Computacional"
+    },
+    {
+        "id": 5,
+        "nome": "Matemática"
+    },
+    {
+        "id": 6,
+        "nome": "Língua inglesa"
     }
 ]
