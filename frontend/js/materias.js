@@ -2,8 +2,6 @@ async function carregarMaterias() {
 
     const token = localStorage.getItem("token");
 
-    console.log("Token recebido:", token);
-
     if (!token) {
 
         alert("Você precisa fazer login.");
@@ -27,8 +25,6 @@ async function carregarMaterias() {
         );
 
         const dados = await resposta.json();
-
-        console.log("Resposta das matérias:", dados);
 
         if (!resposta.ok) {
 
@@ -76,10 +72,7 @@ async function carregarMaterias() {
 
 function escolher(nome) {
 
-    localStorage.setItem(
-        "materia",
-        nome
-    );
+    localStorage.setItem("materia", nome);
 
     window.location.href = "calendario.html";
 

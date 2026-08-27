@@ -1,55 +1,70 @@
-// Todos os horários disponíveis no sistema
-const todosHorarios = [
-    "07:15",
-    "08:05",
-    "08:55",
-    "10:00",
-    "10:50",
-    "11:35"
-];
+async function carregarHorarios() {
 
+    const token = localStorage.getItem("token");
 
-// Horários que já estão ocupados em cada dia
-const horariosOcupados = {
+    const ambiente = localStorage.getItem("ambiente");
 
-    // Dia 6 é AMARELO
-    // Estes horários já estão ocupados
-    6: [
-        "08:55",
-        "10:50",
-        "11:35"
-    ]
+    const data = localStorage.getItem("dataSelecionada");
 
-};
+    if (!token) {
 
+        alert("Você precisa fazer login.");
 
-// Carrega os horários quando a página abrir
-function carregarHorarios() {
+        window.location.href = "index.html";
 
-    const dia = localStorage.getItem("diaSelecionado");
-
-    const lista = document.getElementById("lista-horarios");
-
-    lista.innerHTML = "";
-
-
-    // Se nenhum dia foi selecionado,
-    // volta para o calendário
-    if (!dia) {
-        window.location.href = "calendário.html";
         return;
+
     }
 
+    if (!ambiente || !data) {
 
-    // Verifica quais horários estão ocupados
-    const ocupados = horariosOcupados[dia] || [];
+        alert("Escolha primeiro o ambiente e a data.");
 
+        window.location.href = "calendario.html";
 
-    // Cria os botões dos horários livres
-    todosHorarios.forEach(function(horario) {
+        return;
 
-        // Só cria o botão se o horário estiver livre
-        if (!ocupados.includes(horario)) {
+    }
+
+    try {
+
+        const resposta = await fetch(
+
+            `http://127.0.0.1:5000/horarios?ambiente=${encodeURIComponent(ambiente)}&data=${data}`,
+
+            {
+                method: "GET",
+
+                headers: {
+                    "Authorization": token
+                }
+            }
+
+        );
+
+        const dados = await resposta.json();
+
+        if (!resposta.ok) {
+
+            alert(dados.mensagem);
+
+            return;
+
+        }
+
+        const lista = document.getElementById("lista-horarios");
+
+        lista.innerHTML = "";
+
+        if (dados.length === 0) {
+
+            lista.innerHTML = "<p>Nenhum horário disponível.</p>";
+
+            return;
+
+        }
+
+        dados.forEach(function(horario) {
 
             const botao = document.createElement("button");
 
@@ -58,24 +73,114 @@ function carregarHorarios() {
             botao.textContent = horario;
 
             botao.onclick = function() {
+
                 selecionarHorario(horario);
+
             };
 
             lista.appendChild(botao);
-        }
 
-    });
+        });
+
+    } catch (erro) {
+
+        console.error("Erro:", erro);
+
+        alert("Erro ao carregar horários.");
+
+    }
 
 }
 
 
-// Quando clicar em um horário
 function selecionarHorario(horario) {
 
-    localStorage.setItem("horarioSelecionado", horario);
+    localStorage.setItem(
+        "horarioSelecionado",
+        horario
+    );
 
-    window.location.href = "confirmacao.html";
+    criarReserva();
+
 }
 
 
-window.addEventListener("DOMContentLoaded", carregarHorarios);
+async function criarReserva() {
+
+    const token = localStorage.getItem("token");
+
+    const ambiente = localStorage.getItem("ambiente");
+
+    const materia = localStorage.getItem("materia");
+
+    const data = localStorage.getItem("dataSelecionada");
+
+    const hora = localStorage.getItem("horarioSelecionado");
+
+    try {
+
+        const resposta = await fetch(
+
+            "http://127.0.0.1:5000/reservas",
+
+            {
+                method: "POST",
+
+                headers: {
+
+                    "Content-Type": "application/json",
+
+                    "Authorization": token
+
+                },
+
+                body: JSON.stringify({
+
+                    ambiente: ambiente,
+
+                    materia: materia,
+
+                    data: data,
+
+                    hora: hora
+
+                })
+
+            }
+
+        );
+
+        const dados = await resposta.json();
+
+        if (!resposta.ok) {
+
+            alert(dados.mensagem);
+
+            carregarHorarios();
+
+            return;
+
+        }
+
+        localStorage.setItem(
+
+            "reservaRealizada",
+
+            JSON.stringify(dados.reserva)
+
+        );
+
+        window.location.href = "confirmacao.html";
+
+    } catch (erro) {
+
+        console.error("Erro:", erro);
+
+        alert("Erro ao realizar reserva.");
+
+    }
+
+}
+
+
+carregarHorarios();

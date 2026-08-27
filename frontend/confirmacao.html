@@ -3,61 +3,65 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Reserva Concluída</title>
+    <title>Reserva Concluída</title>
 
-<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
 </head>
 
 <body>
 
-<div class="container">
+    <div class="container">
 
-<div class="conteudo">
+        <div class="conteudo">
 
-<div class="sucesso">
+            <div class="sucesso">
 
-<h1>✅</h1>
+                <h1>✅</h1>
 
-<h2>Reserva realizada!</h2>
+                <h2>Reserva realizada!</h2>
 
-<br>
+                <br>
 
-<p>
+                <p>
+                    Sua reserva foi realizada com sucesso.
+                </p>
 
-Seu laboratório foi reservado com sucesso.
+                <br>
 
-</p>
+                <div id="dadosReserva">
 
-<br><br>
+                </div>
 
-<button
-class="botao-principal"
-onclick="voltar()">
+                <br><br>
 
-Nova Reserva
+                <button
+                    class="botao-principal"
+                    onclick="novaReserva()">
 
-</button>
+                    Nova Reserva
 
-</div>
+                </button>
 
-</div>
+                <button
+                    class="botao-principal"
+                    onclick="verReservas()">
 
-</div>
+                    Minhas Reservas
 
-<script>
+                </button>
 
-function voltar(){
+            </div>
 
-window.location="ambientes.html";
+        </div>
 
-}
+    </div>
 
-</script>
+    <script src="js/confirmacao.js"></script>
 
 </body>
 
