@@ -1,47 +1,64 @@
-async function login(){
+async function login() {
 
-const email=document.getElementById("email").value;
+    const email = document.getElementById("email").value;
+    const senha = document.getElementById("senha").value;
 
-const senha=document.getElementById("senha").value;
+    if (email === "" || senha === "") {
 
-const resposta=await fetch("http://localhost:3000/login",{
+        alert("Preencha o e-mail e a senha.");
 
-method:"POST",
+        return;
+    }
 
-headers:{
+    try {
 
-"Content-Type":"application/json"
+        const resposta = await fetch(
+            "http://localhost:5000/login",
+            {
+                method: "POST",
 
-},
+                headers: {
+                    "Content-Type": "application/json"
+                },
 
-body:JSON.stringify({
+                body: JSON.stringify({
+                    email: email,
+                    senha: senha
+                })
+            }
+        );
 
-email,
+        const dados = await resposta.json();
 
-senha
+        console.log(dados);
 
-})
+        if (resposta.ok) {
 
-});
+            localStorage.setItem(
+                "token",
+                dados.token
+            );
 
-const dados=await resposta.json();
+            localStorage.setItem(
+                "usuario",
+                JSON.stringify(dados.usuario)
+            );
 
-if(resposta.ok){
+            alert("Login realizado com sucesso!");
 
-localStorage.setItem(
+            window.location.href = "ambientes.html";
 
-"usuario",
+        } else {
 
-JSON.stringify(dados.usuario)
+            alert(dados.mensagem);
+        }
 
-);
+    } catch (erro) {
 
-window.location="ambientes.html";
+        console.error(erro);
 
-}else{
-
-alert(dados.mensagem);
-
-}
-
+        alert(
+            "Não foi possível conectar ao servidor Python."
+        );
+    }
 }
