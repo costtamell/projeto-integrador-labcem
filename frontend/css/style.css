@@ -42,3 +42,158 @@ button,
     font-size: 16px;
 }
 
+
+/* =========================================
+   CALENDÁRIO
+========================================= */
+
+.tela {
+    width: 90%;
+    max-width: 750px;
+    margin: 40px auto;
+    text-align: center;
+}
+
+.calendario {
+    width: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.cabecalho-calendario {
+    background: #0b2a59;
+    color: white;
+    padding: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Dias da semana */
+.dias-semana {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: #eeeeee;
+}
+
+.dias-semana span {
+    padding: 15px 5px;
+    font-weight: bold;
+    border-right: 1px solid #ccc;
+}
+
+/* Grade do calendário */
+.dias {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+/* Dias normais */
+.dia,
+.fora {
+    width: 100%;
+    height: 70px;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    border: 1px solid #ddd;
+    background: white;
+    font-size: 20px;
+}
+
+/* Efeito ao passar o mouse */
+.dia:hover:not(:disabled) {
+    background: #e6eef8;
+}
+
+/* Dias do mês anterior/próximo */
+.fora {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    cursor: default;
+}
+
+/* Dia totalmente reservado */
+.dia.reservado {
+    background: #e53935;
+    color: white;
+    cursor: not-allowed;
+}
+
+/* Dia com alguns horários disponíveis */
+.dia.disponivel {
+    background: #fbc02d;
+    color: #222;
+}
+
+
+/* =========================================
+   LEGENDA
+========================================= */
+
+.legenda {
+    width: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 20px;
+    text-align: left;
+}
+
+.legenda-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.bolinha {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.vermelho {
+    background: #e53935;
+}
+
+.amarelo {
+    background: #fbc02d;
+}
+
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .tela {
+        width: 95%;
+        margin: 20px auto;
+    }
+
+    .dia,
+    .fora {
+        height: 50px;
+        font-size: 16px;
+    }
+
+    .dias-semana span {
+        font-size: 11px;
+        padding: 10px 2px;
+    }
+
+    .cabecalho-calendario {
+        font-size: 20px;
+        padding: 15px;
+    }
+
+}

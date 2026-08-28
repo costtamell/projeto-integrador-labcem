@@ -1,6 +1,7 @@
 const reserva = JSON.parse(
-    localStorage.getItem("reservaRealizada")
+    localStorage.getItem("ultimaReserva")
 );
+
 
 const dadosReserva =
     document.getElementById("dadosReserva");
@@ -44,8 +45,6 @@ function novaReserva() {
     localStorage.removeItem("dataSelecionada");
 
     localStorage.removeItem("horarioSelecionado");
-
-    localStorage.removeItem("reservaRealizada");
 
     window.location.href = "ambientes.html";
 

@@ -3,10 +3,9 @@ async function carregarMaterias() {
     const token = localStorage.getItem("token");
 
     if (!token) {
-
         alert("Você precisa fazer login.");
 
-        window.location.href = "index.html";
+        window.location.href = "./index.html";
 
         return;
     }
@@ -39,44 +38,38 @@ async function carregarMaterias() {
 
         dados.forEach(function(m) {
 
-            const card = document.createElement("div");
+            const botao = document.createElement("button");
 
-            card.className = "card";
+            botao.className = "btn";
 
-            const titulo = document.createElement("h3");
+            botao.textContent = m.nome;
 
-            titulo.textContent = m.nome;
+            botao.addEventListener("click", function() {
 
-            card.appendChild(titulo);
+                localStorage.setItem(
+                    "materia",
+                    m.nome
+                );
 
-            card.onclick = function() {
+                window.location.href = "./calendario.html";
 
-                escolher(m.nome);
+            });
 
-            };
-
-            lista.appendChild(card);
+            lista.appendChild(botao);
 
         });
 
     } catch (erro) {
 
-        console.error("Erro ao carregar matérias:", erro);
+        console.error(
+            "Erro ao carregar matérias:",
+            erro
+        );
 
         alert("Erro ao carregar as matérias.");
 
     }
 
 }
-
-
-function escolher(nome) {
-
-    localStorage.setItem("materia", nome);
-
-    window.location.href = "calendario.html";
-
-}
-
 
 carregarMaterias();

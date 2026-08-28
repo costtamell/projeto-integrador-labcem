@@ -1,55 +1,116 @@
-<!DOCTYPE html>
+const API = "http://127.0.0.1:5000";
 
-<html lang="pt-BR">
 
-<head>
+async function carregar() {
 
-<meta charset="UTF-8">
+    const token =
+        localStorage.getItem("token");
 
-<title>Minhas Reservas</title>
 
-<link rel="stylesheet" href="css/style.css">
+    if (!token) {
 
-</head>
+        window.location.href =
+            "index.html";
 
-<body>
+        return;
 
-<div class="container">
+    }
 
-<div class="topo">
 
-<h2 class="titulo">
+    try {
 
-MINHAS RESERVAS
+        const resposta = await fetch(
 
-</h2>
+            `${API}/reservas`,
 
-</div>
+            {
 
-<div class="conteudo">
+                headers: {
 
-<div id="lista">
+                    "Authorization": token
 
-</div>
+                }
 
-<br>
+            }
 
-<button
+        );
 
-class="botao-principal"
 
-onclick="window.location='ambientes.html'">
+        const reservas =
+            await resposta.json();
 
-Nova Reserva
 
-</button>
+        if (!resposta.ok) {
 
-</div>
+            alert(reservas.mensagem);
 
-</div>
+            return;
 
-<script src="js/reservas.js"></script>
+        }
 
-</body>
 
-</html>
+        const lista =
+            document.getElementById("lista");
+
+
+        lista.innerHTML = "";
+
+
+        if (reservas.length === 0) {
+
+            lista.innerHTML =
+                "<p>Nenhuma reserva encontrada.</p>";
+
+            return;
+
+        }
+
+
+        reservas.forEach(function(r) {
+
+            lista.innerHTML += `
+
+                <div class="card">
+
+                    <p>
+                        <b>Ambiente:</b>
+                        ${r.ambiente}
+                    </p>
+
+                    <p>
+                        <b>Matéria:</b>
+                        ${r.materia}
+                    </p>
+
+                    <p>
+                        <b>Data:</b>
+                        ${r.data}
+                    </p>
+
+                    <p>
+                        <b>Horário:</b>
+                        ${r.hora}
+                    </p>
+
+                </div>
+
+                <br>
+
+            `;
+
+        });
+
+    } catch (erro) {
+
+        console.error(erro);
+
+        alert(
+            "Erro ao carregar as reservas."
+        );
+
+    }
+
+}
+
+
+carregar();

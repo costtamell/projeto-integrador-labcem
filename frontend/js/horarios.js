@@ -6,6 +6,7 @@ async function carregarHorarios() {
 
     const data = localStorage.getItem("dataSelecionada");
 
+
     if (!token) {
 
         alert("Você precisa fazer login.");
@@ -15,6 +16,7 @@ async function carregarHorarios() {
         return;
 
     }
+
 
     if (!ambiente || !data) {
 
@@ -26,6 +28,7 @@ async function carregarHorarios() {
 
     }
 
+
     try {
 
         const resposta = await fetch(
@@ -33,38 +36,47 @@ async function carregarHorarios() {
             `http://127.0.0.1:5000/horarios?ambiente=${encodeURIComponent(ambiente)}&data=${data}`,
 
             {
-                method: "GET",
 
                 headers: {
+
                     "Authorization": token
+
                 }
+
             }
 
         );
 
-        const dados = await resposta.json();
+
+        const horarios = await resposta.json();
+
 
         if (!resposta.ok) {
 
-            alert(dados.mensagem);
+            alert(horarios.mensagem);
 
             return;
 
         }
+
 
         const lista = document.getElementById("lista-horarios");
 
         lista.innerHTML = "";
 
-        if (dados.length === 0) {
 
-            lista.innerHTML = "<p>Nenhum horário disponível.</p>";
+        if (horarios.length === 0) {
+
+            lista.innerHTML = `
+                <p>Não há horários disponíveis neste dia.</p>
+            `;
 
             return;
 
         }
 
-        dados.forEach(function(horario) {
+
+        horarios.forEach(function(horario) {
 
             const botao = document.createElement("button");
 
@@ -72,19 +84,25 @@ async function carregarHorarios() {
 
             botao.textContent = horario;
 
-            botao.onclick = function() {
 
-                selecionarHorario(horario);
+            botao.addEventListener("click", function() {
 
-            };
+                criarReserva(horario);
+
+            });
+
 
             lista.appendChild(botao);
+
+            lista.appendChild(
+                document.createElement("br")
+            );
 
         });
 
     } catch (erro) {
 
-        console.error("Erro:", erro);
+        console.error(erro);
 
         alert("Erro ao carregar horários.");
 
@@ -93,19 +111,8 @@ async function carregarHorarios() {
 }
 
 
-function selecionarHorario(horario) {
 
-    localStorage.setItem(
-        "horarioSelecionado",
-        horario
-    );
-
-    criarReserva();
-
-}
-
-
-async function criarReserva() {
+async function criarReserva(horario) {
 
     const token = localStorage.getItem("token");
 
@@ -115,7 +122,6 @@ async function criarReserva() {
 
     const data = localStorage.getItem("dataSelecionada");
 
-    const hora = localStorage.getItem("horarioSelecionado");
 
     try {
 
@@ -124,6 +130,7 @@ async function criarReserva() {
             "http://127.0.0.1:5000/reservas",
 
             {
+
                 method: "POST",
 
                 headers: {
@@ -142,7 +149,7 @@ async function criarReserva() {
 
                     data: data,
 
-                    hora: hora
+                    hora: horario
 
                 })
 
@@ -150,7 +157,9 @@ async function criarReserva() {
 
         );
 
+
         const dados = await resposta.json();
+
 
         if (!resposta.ok) {
 
@@ -162,19 +171,25 @@ async function criarReserva() {
 
         }
 
+
         localStorage.setItem(
-
-            "reservaRealizada",
-
-            JSON.stringify(dados.reserva)
-
+            "horarioSelecionado",
+            horario
         );
+
+
+        localStorage.setItem(
+            "ultimaReserva",
+            JSON.stringify(dados.reserva)
+        );
+
 
         window.location.href = "confirmacao.html";
 
+
     } catch (erro) {
 
-        console.error("Erro:", erro);
+        console.error(erro);
 
         alert("Erro ao realizar reserva.");
 
